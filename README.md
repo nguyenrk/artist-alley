@@ -1,1 +1,1 @@
-"# artist-alley" 
+Artist Alley application for Rose Hulman Android CSSE 473
