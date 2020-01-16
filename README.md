@@ -1,2 +1,2 @@
 # Artist Alley
-Artist Alley application for Rose Hulman Android CSSE 473
+Artist Alley application for Rose Hulman Android CSSE 483
