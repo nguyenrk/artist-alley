@@ -62,11 +62,11 @@ class HomeFragment : Fragment() {
     ): View? {
 
         rootView = inflater.inflate(R.layout.fragment_picture_grid, container, false) as RecyclerView
-        rootView.apply{
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-
-            adapter = adapter
-        }
+//        rootView.apply{
+//            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+//
+//            adapter = adapter
+//        }
         //homeView = inflater.inflate(R.layout.fragment_home, container, false)
         setAdapterWithColumns(columns)
         (activity as MainActivity).fab.setOnClickListener {
