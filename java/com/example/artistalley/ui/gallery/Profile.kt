@@ -8,7 +8,7 @@ import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Profile (var name: String = "", var location: String = "", var resourceID: Int = android.R.drawable.ic_menu_gallery): Parcelable
+data class Profile (var name: String = "", var location: String = "", var resourceID: String = ""): Parcelable
 {
     @get:Exclude
     var id =""

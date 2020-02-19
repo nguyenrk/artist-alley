@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.artistalley.R
+import com.example.artistalley.ui.gallery.Profile
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
@@ -17,18 +18,24 @@ import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
 import kotlin.random.Random
 
-class HomeAdapter(val context: Context, private val listener: HomeFragment.OnThumbnailListener?): RecyclerView.Adapter<HomeViewHolder>(){
+class HomeAdapter(val context: Context, private val listener: HomeFragment.OnThumbnailListener?, private val profileIdVal: String, private var uid: String = "temp"): RecyclerView.Adapter<HomeViewHolder>(){
     lateinit var listenerRegistration: ListenerRegistration
     private val thumbnails = ArrayList<Thumbnail>()
     private val TYPE_HEADER = 0
     private val TYPE_ITEM = 1
     private val thumbnailRef = FirebaseFirestore
         .getInstance()
+        .collection("users")
+        .document(uid)
+        .collection("artists")
+        .document(profileIdVal)
         .collection("artwork")
     private val storageRef = FirebaseStorage
         .getInstance()
         .reference
-        .child("images")
+        .child(uid)
+        .child(profileIdVal)
+
     init {
         thumbnailRef.addSnapshotListener { snapshot: QuerySnapshot?, exception: FirebaseFirestoreException? ->
 
@@ -50,11 +57,6 @@ class HomeAdapter(val context: Context, private val listener: HomeFragment.OnThu
         viewHolder.bind(thumbnails[position])
     }
 
-//    override fun getItemViewType(position: Int): Int {
-//
-//        if (isPosi)
-//        //return super.getItemViewType(position)
-//    }
     fun onThumbnailSelected(position: Int) {
         listener?.onThumbnailSelected(thumbnails[position])
     }
@@ -64,6 +66,18 @@ class HomeAdapter(val context: Context, private val listener: HomeFragment.OnThu
         //thumbnailRef.add(Thumbnail(localPath))
         ImageRescaleTask(localPath).execute()
     }
+
+    fun deleteTest(position: Int){
+        var storage = FirebaseStorage.getInstance()
+        //val deleteRef = storageRef.child("images/"+thumbnails[position].url.substring(87, 106))
+        val deleteRef = storage.getReferenceFromUrl(thumbnails[position].url)
+
+//        Log.d(Constants.TAG, )
+        deleteRef.delete().addOnSuccessListener {
+            thumbnailRef.document(thumbnails[position].id).delete()
+        }.addOnFailureListener{
+        }
+    }
     inner class ImageRescaleTask(val localPath: String) : AsyncTask<Void, Void, Bitmap>() {
         override fun doInBackground(vararg p0: Void?): Bitmap? {
             // Reduces length and width by a factor (currently 2).
@@ -72,8 +86,6 @@ class HomeAdapter(val context: Context, private val listener: HomeFragment.OnThu
         }
 
         override fun onPostExecute(bitmap: Bitmap?) {
-            // that uses Firebase storage.
-            // https://firebase.google.com/docs/storage/android/upload-files
             storageAdd(localPath, bitmap)
         }
 
@@ -105,20 +117,6 @@ class HomeAdapter(val context: Context, private val listener: HomeFragment.OnThu
     }
 
 
-//    fun addSoloSnapshotListener(){
-//        listenerRegistration = thumbnailRef
-//            .whereEqualTo("uid", uid)
-//            .addSnapshotListener{snapshot, firebaseFirestoreException ->
-//                if(firebaseFirestoreException != null){
-//                    return@addSnapshotListener
-//                    //Log.w("PB", "listen error", firebaseFirestoreException)
-//                }
-//                else{
-//                    processThumbnailDiffs(snapshot!!)
-//                }
-//
-//            }
-//    }
     private fun processThumbnailDiffs(snapshot: QuerySnapshot) {
         for (documentChange in snapshot.documentChanges) {
             val thumbnail = Thumbnail.fromSnapshot(documentChange.document)

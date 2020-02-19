@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
+        android:id="@+id/image_profile_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Profile image link"
+        android:textSize="24dp"
+        android:inputType="textUri"
+        />
+    <EditText
         android:id="@+id/profile_edit_name"
         android:layout_width="match_parent"
+        android:layout_below="@+id/image_profile_link"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:hint="@string/profile_name"
         android:inputType="textCapWords"
         />
+
     <EditText
         android:id="@+id/profile_edit_location"
+        android:layout_below="@+id/profile_edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:hint="@string/profile_location"
+        android:hint="Location"
         android:inputType="textCapWords"
         />
 
-</LinearLayout>
+
+
+</RelativeLayout>

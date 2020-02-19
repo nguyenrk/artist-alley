@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/anime_wallpaper"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_button"
+        android:layout_centerInParent="true"
+        android:drawableTop="@android:drawable/ic_menu_gallery"
+        android:text="Login"
+        />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/anime_icon"
+        android:layout_above="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ax_logo_new"
+        />
+
+
+
+</RelativeLayout>

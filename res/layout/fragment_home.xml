@@ -6,16 +6,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-
     <View
         android:id="@+id/myRectangleBorder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Business Card Viewer"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="35dp"
+        android:textSize="24dp"
+        android:textColor="@android:color/holo_blue_dark"
+        />
+    <AdapterViewFlipper
+        android:id="@+id/business_card"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="31dp"
+        android:flipInterval="3200"
+        android:autoStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="30dp"
+        android:layout_alignParentTop="true"
+
+        />
+
+
     <View
         android:id="@+id/Headline"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
@@ -27,14 +48,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Gallery Page"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
-        android:layout_marginRight="48dp"
+        android:layout_marginLeft="35dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="145dp"
         android:textSize="24sp"
         android:textColor="@android:color/holo_blue_dark"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="33dp"
+        />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
